@@ -26,7 +26,7 @@ class Story {
 
   getHostName() {
     // UNIMPLEMENTED: complete this function!
-    return new URL(this.url).hostname;
+    return new URL(this.url).host;
   }
 }
 
@@ -57,7 +57,7 @@ class StoryList {
     // query the /stories endpoint (no auth required)
     const response = await axios({
       url: `${BASE_URL}/stories`,
-      method: "GET",
+      method: "GET", // method GET to get the story
     });
 
     // turn plain old story objects from API into instances of Story class
@@ -77,7 +77,7 @@ class StoryList {
   async addStory(user, {title, author, url}) {
     const token = user.loginToken;
     const response = await axios({
-      method: "POST",
+      method: "POST", // method POST to add the story
       url: `${BASE_URL}/stories`,
       data: { token, story: {title, author, url}}
     });
@@ -88,12 +88,12 @@ class StoryList {
     return story;
   }
 
-/* Delete story frin API and remove from the story list. */
+/* Delete story from API and remove from the story list. */
 async removeStory(user, storyId) {
   const token = user.loginToken;
   await axios({
     url: `${BASE_URL}/stories/${storyId}`,
-    method: "DELETE",
+    method: "DELETE", // method DELETE to remove the story
     data: { token: user.loginToken}
   });
 
@@ -146,7 +146,7 @@ class User {
   static async signup(username, password, name) {
     const response = await axios({
       url: `${BASE_URL}/signup`,
-      method: "POST",
+      method: "POST", // method POST to sign up (put) new account into data
       data: { user: { username, password, name } },
     });
 
@@ -170,10 +170,11 @@ class User {
    * - password: an existing user's password
    */
 
+  // could be same as signup, but no need to ask for name anymore
   static async login(username, password) {
     const response = await axios({
       url: `${BASE_URL}/login`,
-      method: "POST",
+      method: "POST", // method POST to log in (put) an existing accounte
       data: { user: { username, password } },
     });
 
@@ -194,17 +195,17 @@ class User {
   /** When we already have credentials (token & username) for a user,
    *   we can log them in automatically. This function does that.
    */
-
+  // use Token to check if the username is already in the system or not
   static async loginViaStoredCredentials(token, username) {
     try {
       const response = await axios({
         url: `${BASE_URL}/users/${username}`,
-        method: "GET",
+        method: "GET", // method GET to get the ${username}
         params: { token },
       });
 
       let { user } = response.data;
-
+      // if ${username} is there, return it, if not, return error
       return new User(
         {
           username: user.username,

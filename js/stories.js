@@ -65,19 +65,19 @@ function putStoriesOnPage() {
 
   // loop through all of our stories and generate HTML for them
   for (let story of storyList.stories) {
-    const $story = generateStoryMarkup(story);
-    $allStoriesList.append($story);
+    const $story = generateStoryMarkup(story); // get story from generateStoryMarkup function
+    $allStoriesList.append($story); // add story to list
   }
 
-  $allStoriesList.show();
+  $allStoriesList.show(); // show the story list
 }
  
 /* Handle deleting a story */
 async function deleteStory(evt){
   console.debug("deleteStory");
 
-  const $closestLi = $(evt.target).closest("li");
-  const storyId = $closestLi.attr("id");
+  const $closestLi = $(evt.target).closest("li"); // get the story which locates in the <li> tag in order to set target
+  const storyId = $closestLi.attr("id"); // get id of that story
 
   await storyList.removeStory(currentUser, storyId);
 
@@ -119,12 +119,12 @@ function putUserStoriesOnPage(){
   $ownStories.empty();
 
   if(currentUser.ownStories.length === 0){
-    $ownStories.append("<h5>No stories added by user yet!</h5>");
+    $ownStories.append("<h5>No stories added by user yet!</h5>");// return message
   } else {
     // loop through all of users stories and generate HTML for them
     for (let story of currentUser.ownStories){
       let $story = generateStoryMarkup(story, true);
-      $ownStories.append($story);
+      $ownStories.append($story); // if yes, add story into 'my stories'
     }
   }
   $ownStories.show();
@@ -174,13 +174,13 @@ function putFavoritesListOnPage() {
 }
 
 /** Handle favorite/un-favorite a story */
-
+// star or not star
 async function toggleStoryFavorite(evt) {
  console.debug("toggleStoryFavorite");
 
  const $tgt = $(evt.target);
  const $closestLi = $tgt.closest("li");
- const storyId = $closestLi.attr("id");
+ const storyId = $closestLi.attr("id");// get id of the story that get from the first <li> (story)
  const story = storyList.stories.find(s => s.storyId === storyId);
 
  // see if the item is already favorited (checking by presence of star)
