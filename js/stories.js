@@ -1,5 +1,5 @@
 "use strict";
-
+// contains code for UI about listing stories
 // This is the global list of the stories, an instance of StoryList
 let storyList;
 

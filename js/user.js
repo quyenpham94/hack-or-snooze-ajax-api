@@ -1,5 +1,6 @@
 "use strict";
-
+// contains code for UI about logging in/ singing up/ logging out
+// as well as code about remembering a user when they refresh the page and logginf them in automatically
 // global to hold the User instance of the currently-logged-in user
 let currentUser;
 

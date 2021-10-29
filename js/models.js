@@ -1,4 +1,5 @@
 "use strict";
+//  contains classes to manage the data of the app and the connection to the API
 
 const BASE_URL = "https://hack-or-snooze-v3.herokuapp.com";
 
@@ -25,7 +26,7 @@ class Story {
 
   getHostName() {
     // UNIMPLEMENTED: complete this function!
-    return new URL(this.url).host;
+    return new URL(this.url).hostname;
   }
 }
 
