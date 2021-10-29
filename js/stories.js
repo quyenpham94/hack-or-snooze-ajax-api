@@ -174,7 +174,7 @@ function putFavoritesListOnPage() {
 }
 
 /** Handle favorite/un-favorite a story */
-// star or not star
+// star marking or not star marking
 async function toggleStoryFavorite(evt) {
  console.debug("toggleStoryFavorite");
 

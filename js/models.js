@@ -224,14 +224,14 @@ class User {
   
   /* Add a story to the list of user favorites and update the API */
   async addFavorite(story) {
-    this.favorites.push(story);
-    await this._addOrRemoveFavorite("add", story)
+    this.favorites.push(story); // push this 'story' into user's favorite list
+    await this._addOrRemoveFavorite("add", story) // call this function out with POST method
   }
 
   /* Remove a story to the list of user favorites and update the API */
   async removeFavorite(story) {
     this.favorites = this.favorites.filter(s => s.storyId !== story.storyId);
-    await this._addOrRemoveFavorite("remove", story);
+    await this._addOrRemoveFavorite("remove", story); // call this funtion out with DELETE method
   }
 
   /* Update API with favorite/not-favorite */
@@ -239,7 +239,7 @@ class User {
     const method = newState === "add" ? "POST" : "DELETE";
     const token = this.loginToken;
     await axios({
-      url: `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`,
+      url: `${BASE_URL}/users/${this.username}/favorites/${story.storyId}`, // get into user page to add or remove user's fav
       method: method,
       data: {token},
     });

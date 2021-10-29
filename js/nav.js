@@ -1,5 +1,5 @@
 "use strict";
-
+// contain code to show/hide things in the navigation bar, and well as code for when a user clicks in that bar.
 /******************************************************************************
  * Handling navbar clicks and updating navbar
  */
